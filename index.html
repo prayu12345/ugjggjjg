@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Image Gallery</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .gallery-container {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 15px;
+      max-width: 1200px;
+      width: 100%;
+      margin: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    .box {
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+    }
+
+    .box img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.3s ease;
+      border-bottom: 2px solid #ddd;
+    }
+
+    .box p {
+      margin: 0;
+      padding: 10px;
+      background-color: #fff;
+      text-align: center;
+      color: #333;
+      font-size: 18px;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .box:hover img {
+      transform: scale(1.1);
+    }
+
+    .box:hover p {
+      background-color: #007bff;
+      color: #fff;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      padding: 20px;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+    }
+
+    .modal:target {
+      display: flex;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #ff4040;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .modal-close:hover {
+      background-color: #ff2222;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .gallery-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+    <div>
+
+        <a href="./slider_3d/dragon.html"><h1>my doc</h1></a>
+    </div>
+  <div class="gallery-container">
+    <div class="box" onclick="openModal('image1.jpg')">
+      
+      <p>Image 1</p>
+    </div>
+    <div class="box" onclick="openModal('image2.jpg')">
+      <img src="image2.jpg" alt="Image 2">
+      <p>Image 2</p>
+    </div>
+    <div class="box" onclick="openModal('image3.jpg')">
+      <img src="image3.jpg" alt="Image 3">
+      <p>Image 3</p>
+    </div>
+    <div class="box" onclick="openModal('image4.jpg')">
+      <img src="image4.jpg" alt="Image 4">
+      <p>Image 4</p>
+    </div>
+    <div class="box" onclick="openModal('image5.jpg')">
+      <img src="image5.jpg" alt="Image 5">
+      <p>Image 5</p>
+    </div>
+  </div>
+
+  <!-- Modal for Enlarged Image -->
+  <div id="modal" class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <img id="modal-image" src="" alt="Enlarged Image">
+  </div>
+
+  <script>
+    function openModal(imageSrc) {
+      const modal = document.getElementById('modal');
+      const modalImage = document.getElementById('modal-image');
+      modal.style.display = 'flex';
+      modalImage.src = imageSrc;
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      modal.style.display = 'none';
+    }
+
+    // Adding transition to smoothly animate the gallery when hovering
+    const galleryContainer = document.querySelector('.gallery-container');
+    galleryContainer.addEventListener('mouseenter', function() {
+      galleryContainer.style.transform = 'scale(1.02)';
+    });
+    galleryContainer.addEventListener('mouseleave', function() {
+      galleryContainer.style.transform = 'scale(1)';
+    });
+  </script>
+
+</body>
+</html>
